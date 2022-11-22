@@ -17,7 +17,7 @@ QUERY = dynaconfig.settings["NEWS_API"]["QUERY"]
 LANGUAGE = dynaconfig.settings["NEWS_API"]["LANGUAGE"]
 TIME_TO_PURGE = dynaconfig.settings["TIMINIGS"]["TIME_TO_PURGE"]
 TIME_TO_SEARCH = dynaconfig.settings["TIMINIGS"]["TIME_TO_SEARCH"]
-NEWS_DB_API_URL = dynaconfig.settings["DB"]["NEWS_DB_API_URL"]
+NEWS_DB_API_URL = dynaconfig.settings["DB"]["DB_API_URL"]
 
 newsapi = NewsApiClient(api_key=API_KEY)
 
