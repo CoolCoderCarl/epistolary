@@ -120,7 +120,7 @@ jobs:
           context: .
           push: true
           file: Containerfile
-          tags: h0d0user/attainments_sanctuary:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/epistolary:latest
 
       - name: Notify if failure
         if: ${{ failure() }}
@@ -158,7 +158,7 @@ jobs:
 
             Branch: ${{ github.ref }}
 
-            <b>Pushed image:</b> <code>docker pull h0d0user/attainments_sanctuary:latest</code>
+            <b>Pushed image:</b> <code>docker pull ${{ secrets.DOCKER_USERNAME }}/epistolary:latest</code>
 
             See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
 
