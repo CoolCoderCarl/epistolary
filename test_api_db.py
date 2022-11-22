@@ -30,8 +30,4 @@ def test_purge():
 
 
 if __name__ == "__main__":
-    test_healthcheck()
-    test_insert()
-    test_get_news()
-    test_purge()
-    test_get_news()
+    pass
