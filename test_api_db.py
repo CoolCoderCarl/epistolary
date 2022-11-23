@@ -29,5 +29,10 @@ def test_purge():
     assert response.status_code == 200
 
 
+def test_entities():
+    response = int(requests.get(f"{API_URL}/entities").text)
+    assert isinstance(response, int)
+
+
 if __name__ == "__main__":
     pass
