@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  attainments_sanctuary:
+    container_name: attainments_sanctuary
+    image: h0d0user/attainments_sanctuary:latest
+    pull_policy: always
+    restart: always
+    networks:
+      - etl
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: "curl http://attainments_sanctuary:8888/healthcheck | jq -r '.healthcheck'"
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  epistolary:
+    container_name: epistolary
+    image: h0d0user/epistolary:latest
+    pull_policy: always
+    restart: always
+    networks:
+      - etl
+    hostname: epistolary
+    depends_on:
+      attainments_sanctuary:
+        condition: service_healthy
+    volumes:
+      - "./settings.toml:/opt/settings.toml"
+
+  datapath:
+    container_name: datapath
+    image: h0d0user/datapath:latest
+    pull_policy: always
+    restart: always
+    networks:
+      - etl
+    hostname: datapath
+    depends_on:
+      attainments_sanctuary:
+        condition: service_healthy
+    volumes:
+      - "./settings.toml:/opt/settings.toml"
+
+networks:
+  etl:
