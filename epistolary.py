@@ -15,7 +15,6 @@ import dynaconfig
 API_KEY = dynaconfig.settings["NEWS_API"]["API_KEY"]
 QUERY = dynaconfig.settings["NEWS_API"]["QUERY"]
 LANGUAGE = dynaconfig.settings["NEWS_API"]["LANGUAGE"]
-TIME_TO_PURGE = dynaconfig.settings["TIMINIGS"]["TIME_TO_PURGE"]
 TIME_TO_SEARCH = dynaconfig.settings["TIMINIGS"]["TIME_TO_SEARCH"]
 NEWS_DB_API_URL = dynaconfig.settings["DB"]["DB_API_URL"]
 
@@ -100,15 +99,6 @@ if __name__ == "__main__":
         time.sleep(1)
         if is_api_available():
             logging.info("Connected to API.")
-            if CURRENT_TIME == TIME_TO_PURGE:
-                logging.info(f"Time to purge has come !")
-                try:
-                    response = rq.get(f"{NEWS_DB_API_URL}/purge")
-                except BaseException as base_err:
-                    logging.error(f"BaseException: {base_err}")
-            else:
-                logging.info(f"Still waiting for purging.")
-
             if CURRENT_TIME == TIME_TO_SEARCH:
                 logging.info("Time to search has come !")
                 try:
@@ -125,5 +115,7 @@ if __name__ == "__main__":
                     logging.error(f"BaseException: {base_err}")
             else:
                 logging.info("Still waiting for searching.")
+                time.sleep(5)
         else:
             logging.error("API is not available !")
+            time.sleep(5)
